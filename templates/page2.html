@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Fill in the Blank Generator</h1>
+    <div class="pagination">
+        <a class="page-link" href="/">Page 1</a>
+        <div class="page-connector"></div>
+        <a class="page-link current" href="/page2">Page 2</a>
+        <div class="page-connector"></div>
+        <a class="page-link" href="/page3">Page 3</a>
+    </div>
+    <div class="page-content">
+        <form method="POST" action="/page3">
+            <input type="hidden" name="text" value="{{ text }}">
+            <p>Select a random word from the input:</p>
+            <select name="selected_word" id="selected_word">
+                {% for word in words %}
+                    <option value="{{ word }}">{{ word }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
+    </div>
+    <script>
+        function goBack() {
+            const textInput = document.getElementById("text");
+            const selectedWord = document.getElementById("selected_word").value;
+            textInput.value = "{{ text }}";
+            document.forms["form"].action = "/";
+            document.forms["form"].submit();
+        }
+    </script>
+    <footer class="page-footer">
+        <p>Made by Sai Charan Rapaka</p>
+    </footer>
+</body>
+</html>
